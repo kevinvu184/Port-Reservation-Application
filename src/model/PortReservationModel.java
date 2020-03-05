@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PortReservationModel {
@@ -35,8 +36,7 @@ public class PortReservationModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		Scanner input = new Scanner(System.in);
 		System.out.print("\n---------------------");
 		System.out.print("\nName: ");
@@ -48,7 +48,6 @@ public class PortReservationModel {
 		do {
 			System.out.print("Port: ");
 			portReserve = Integer.parseInt(input.nextLine());
-			
 			if (map.containsKey(portReserve) && map.get(portReserve) == null) {
 				portReserved = false;
 			} else {
@@ -63,16 +62,20 @@ public class PortReservationModel {
 		map.put(portReserve, student);
 		EmailSocketModel.run(student);
 
-		// writing to file
+		// writing to student database
 		try {
 			FileWriter file = new FileWriter("students.txt", true);
 			PrintWriter writer = new PrintWriter(file);
 			writer.println(student.toString());
-			writer.close();
+			writer.close(); 
 
 		} catch (IOException e) {
 
 		}
 
+	}
+
+	public void injectMap(Map<Integer, Student> map) {
+		this.map = (HashMap<Integer, Student>) map;
 	}
 }

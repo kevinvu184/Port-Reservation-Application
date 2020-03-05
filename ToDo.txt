@@ -1,0 +1,5 @@
+1.Refactor/Design code especially on mailing
+
+2.Add info to inform available ports
+
+3.Add GUI 

@@ -3,7 +3,7 @@ package model;
 import java.util.Scanner;
 
 public class Menu {
-
+	private Persistence p = new Persistence();
 	private PortReservationModel portRun;
 	private Scanner input;
 
@@ -13,7 +13,13 @@ public class Menu {
 	}
 
 	public void runWelcomeMenu() {
-		boolean firstRun=true;
+		boolean firstRun = true;
+		Persistence p = new Persistence();
+		if (p.getBackUpExist()) {
+			System.out.println("YOUR DATA HAS BEEN RECOVERED!!!");
+			firstRun = false;
+			portRun.injectMap(p.getMap());
+		}
 		int selection;
 		do {
 			System.out.println("\t\t\tWelcome to Port Reservation Networking Program");
@@ -23,9 +29,11 @@ public class Menu {
 			selection = input.nextInt();
 			if (selection == 1) {
 				portRun.run(firstRun);
-				firstRun=false;
-			} else {
+				firstRun = false;
+			} else if (selection == 2) {
 				System.out.println("\nGoodbye!!!");
+			} else {
+				System.out.println("\t\tINVALID SELECTION PLEASE CHOOSE AGAIN\n");
 			}
 		} while (selection != 2);
 	}
