@@ -1,2 +1,3 @@
-StudentID		Name		Port		Email
+StudenID		Student_Name		Port_Number		Email
+
 s3678491		Ted		61001		tedvu184@gmail.com

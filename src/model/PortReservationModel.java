@@ -1,5 +1,6 @@
 package model;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -9,11 +10,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PortReservationModel {
+	private HashMap<Integer, Student> map = new HashMap<Integer, Student>();
+	public static final int START_PORT = 61000;
+	public static final int END_PORT = 61999;
 
-	public static void main(String[] args) {
-		HashMap<Integer, Student> map = new HashMap<Integer, Student>();
-		for (int i = 61000; i <= 61999; ++i) {
-			map.put(i, null);
+	public void run(boolean firstRun) {
+		if (firstRun) {
+			for (int i = START_PORT; i <= END_PORT; ++i) {
+				map.put(i, null);
+			}
 		}
 
 		// Write ports to database
@@ -30,8 +35,10 @@ public class PortReservationModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		Scanner input = new Scanner(System.in);
-		System.out.println("Port Reservation Networking Program");
+		System.out.print("\n---------------------");
 		System.out.print("\nName: ");
 		String name = input.nextLine();
 		System.out.print("Student id: ");
@@ -41,7 +48,7 @@ public class PortReservationModel {
 		do {
 			System.out.print("Port: ");
 			portReserve = Integer.parseInt(input.nextLine());
-
+			
 			if (map.containsKey(portReserve) && map.get(portReserve) == null) {
 				portReserved = false;
 			} else {
@@ -53,13 +60,13 @@ public class PortReservationModel {
 		System.out.print("Email:");
 		String email = input.nextLine();
 		Student student = new Student(studentID, name, portReserve, email);
-
+		map.put(portReserve, student);
 		EmailSocketModel.run(student);
 
 		// writing to file
 		try {
-			PrintWriter writer = new PrintWriter("students.txt");
-			writer.println("StudentID\t\tName\t\tPort\t\tEmail");
+			FileWriter file = new FileWriter("students.txt", true);
+			PrintWriter writer = new PrintWriter(file);
 			writer.println(student.toString());
 			writer.close();
 

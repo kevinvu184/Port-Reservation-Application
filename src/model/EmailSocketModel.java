@@ -36,7 +36,7 @@ public class EmailSocketModel {
 				 */
 				String responseLine;
 				while ((responseLine = in.readLine()) != null) {
-					System.out.println("Server: " + responseLine);
+					System.out.println("\nServer: " + responseLine);
 					if (responseLine.indexOf("220") != -1) {
 						break;
 					}
@@ -75,7 +75,7 @@ public class EmailSocketModel {
 				 * message in a RCPT TO command.
 				 */
 
-				out.println("RCPT TO: "+student.getEmail());
+				out.println("RCPT TO: " + student.getEmail());
 				// out.println("RCPT TO: catalink21@yahoo.com");
 				while ((responseLine = in.readLine()) != null) {
 					System.out.println("Server: " + responseLine);
@@ -103,10 +103,10 @@ public class EmailSocketModel {
 
 				// out.println("X-Mailer: Java");
 				out.println("From: mytest@test.com");
-				out.println("To: "+student.getEmail());
+				out.println("To: " + student.getEmail());
 				out.println("Subject: TEST EMAIL");
 				out.println();
-				out.println("Hi "+student.getName());
+				out.println("Hi " + student.getName() + ",");
 				out.println("\nCongratulation you have successfully registered your port");
 				out.println("Here is your information:\n\n");
 				out.println("StudentID\t\tName\t\tPort\t\tEmail");
@@ -137,8 +137,8 @@ public class EmailSocketModel {
 					}
 				}
 
-				System.out.println("Email successfully sent!");
-
+				System.out.println("Email successfully sent!\n");
+				System.out.println("\n---------------------\n");
 				out.close();
 				in.close();
 				smtpSocket.close();
