@@ -3,11 +3,10 @@ package model;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class PortReservationModel {
@@ -22,21 +21,6 @@ public class PortReservationModel {
 			}
 		}
 
-		// Write ports to database
-		try {
-			PrintWriter writer = new PrintWriter("available_port.txt", "utf-8");
-			writer.println("Available port\n");
-			List<Integer> ports = new ArrayList<Integer>(map.keySet());
-			Collections.sort(ports);
-			for (int i = 0; i < ports.size(); ++i) {
-				writer.println(ports.get(i));
-			}
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		Scanner input = new Scanner(System.in);
 		System.out.print("\n---------------------");
 		System.out.print("\nName: ");
@@ -46,7 +30,13 @@ public class PortReservationModel {
 		int portReserve;
 		boolean portReserved = true;
 		do {
+			if (getAvailablePort().length() > 0) {
+				System.out.println("NOTE:Current available port is 61000-61999 excluding: " + getAvailablePort());
+			} else {
+				System.out.println("NOTE:Current available port is 61000-61999");
+			}
 			System.out.print("Port: ");
+
 			portReserve = Integer.parseInt(input.nextLine());
 			if (map.containsKey(portReserve) && map.get(portReserve) == null) {
 				portReserved = false;
@@ -67,7 +57,7 @@ public class PortReservationModel {
 			FileWriter file = new FileWriter("students.txt", true);
 			PrintWriter writer = new PrintWriter(file);
 			writer.println(student.toString());
-			writer.close(); 
+			writer.close();
 
 		} catch (IOException e) {
 
@@ -75,7 +65,32 @@ public class PortReservationModel {
 
 	}
 
+	public String getAvailablePort() {
+		StringBuffer sBuffer = new StringBuffer("");
+		Iterator<Entry<Integer, Student>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Student> pair = (Map.Entry<Integer, Student>) it.next();
+			if (pair.getValue() != null) {
+				sBuffer.append(pair.getKey() + ", ");
+			}
+		}
+		return sBuffer.substring(0, sBuffer.length() == 0 ? 0 : sBuffer.length() - 2);
+	}
+
 	public void injectMap(Map<Integer, Student> map) {
 		this.map = (HashMap<Integer, Student>) map;
+	}
+
+	public StringBuffer getDatabase() {
+		StringBuffer sBuffer = new StringBuffer("");
+		Iterator<Entry<Integer, Student>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Student> pair = (Map.Entry<Integer, Student>) it.next();
+			if (pair.getValue() != null) {
+				sBuffer.append(pair.getValue().toString()+"\n");
+				sBuffer.append("-----------------------------------------------------------------------------------\n");
+			}
+		}
+		return sBuffer;
 	}
 }

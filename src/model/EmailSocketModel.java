@@ -14,11 +14,12 @@ public class EmailSocketModel {
 	private static BufferedReader in;
 
 	public static void run(Student student) {
-		// Initialization section:
-		// Try to open a socket on port 25
-		// Try to open input and output streams
+
 		try {
+			// Open a socket on port 25 try-catch(UnknownHostException e)
 			smtpSocket = new Socket("localhost", 25);
+
+			// Initialize Streams for communication between host and server
 			in = new BufferedReader(new InputStreamReader(smtpSocket.getInputStream()));
 			out = new PrintWriter(smtpSocket.getOutputStream(), true);
 		} catch (UnknownHostException e) {
@@ -27,13 +28,11 @@ public class EmailSocketModel {
 			System.err.println("Couldn't get I/O for the connection to: hostname");
 		}
 
-		// If everything has been initialized then we want to write some data
-		// to the socket we have opened a connection to on port 25
+		//
 		if (smtpSocket != null && out != null && in != null) {
 			try {
-				/*
-				 * STEP 1 Get a greeting by the server
-				 */
+
+				// Get greeting message from the server
 				String responseLine;
 				while ((responseLine = in.readLine()) != null) {
 					System.out.println("\nServer: " + responseLine);
@@ -42,11 +41,8 @@ public class EmailSocketModel {
 					}
 				}
 
-				/*
-				 * STEP 2 The client initiates its dialog by responding with a HELO command
-				 * identifying itself
-				 */
-
+				// The clients starts communication by first introduce itself to server with
+				// HELO command
 				out.println("HELO " + InetAddress.getLocalHost().getHostAddress());
 				System.out.println("HELO " + InetAddress.getLocalHost().getHostAddress());
 				while ((responseLine = in.readLine()) != null) {
@@ -56,13 +52,10 @@ public class EmailSocketModel {
 					}
 				}
 
-				/*
-				 * STEP 3 The client notifies the receiver of the originating email address of
-				 * the message in a MAIL FROM command.
-				 */
-
-				// out.println("MAIL From: " + fromto);
-				out.println("MAIL From: mytest@test.com");
+				// The client informs receiver server about the sender's email address by using
+				// MAIL From
+				// command
+				out.println("MAIL From: RMITNetworkingProgrammingCourse@rmit.edu.au");
 				while ((responseLine = in.readLine()) != null) {
 					System.out.println("Server: " + responseLine);
 					if (responseLine.indexOf("250") != -1) {
@@ -70,13 +63,9 @@ public class EmailSocketModel {
 					}
 				}
 
-				/*
-				 * STEP 4 The client notifies the receiver of the recipient email address of the
-				 * message in a RCPT TO command.
-				 */
-
+				// The client informs receiver server about the recipient's email address by
+				// using RCPT From command
 				out.println("RCPT TO: " + student.getEmail());
-				// out.println("RCPT TO: catalink21@yahoo.com");
 				while ((responseLine = in.readLine()) != null) {
 					System.out.println("Server: " + responseLine);
 					if (responseLine.indexOf("250") != -1) {
@@ -84,12 +73,8 @@ public class EmailSocketModel {
 					}
 				}
 
-				/*
-				 * STEP 5 Send DATA command
-				 */
-
+				// Send DATA command before initializing email body
 				out.println("DATA");
-				// out.println("DATA\n");
 				while ((responseLine = in.readLine()) != null) {
 					System.out.println("Server: " + responseLine);
 					if (responseLine.indexOf("354") != -1) {
@@ -97,14 +82,10 @@ public class EmailSocketModel {
 					}
 				}
 
-				/*
-				 * STEP 6 Send Email Body
-				 */
-
-				// out.println("X-Mailer: Java");
-				out.println("From: mytest@test.com");
+				// Send email body
+				out.println("From: RMITNetworkingProgrammingCourse@rmit.edu.au");
 				out.println("To: " + student.getEmail());
-				out.println("Subject: TEST EMAIL");
+				out.println("Subject: Port Resgistration Notification");
 				out.println();
 				out.println("Hi " + student.getName() + ",");
 				out.println("\nCongratulation you have successfully registered your port");
@@ -115,7 +96,6 @@ public class EmailSocketModel {
 				out.println("RMIT Network Programming course");
 				out.println();
 				out.println(".");
-				// out.println();
 
 				while ((responseLine = in.readLine()) != null) {
 					System.out.println("Server: " + responseLine);
@@ -124,10 +104,7 @@ public class EmailSocketModel {
 					}
 				}
 
-				/*
-				 * STEP 7 Send Quit command
-				 */
-
+				// Use QUIT command to terminate connection with SMTP server
 				out.println("QUIT");
 
 				while ((responseLine = in.readLine()) != null) {
