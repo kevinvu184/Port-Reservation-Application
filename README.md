@@ -5,7 +5,7 @@ This is a port reservation application implemented in Java
 
 1.Decouple PortReservationModel not printing console (moderate priority) 
 
-2.Add GUI (not priority) 
+2.Add GUI (low priority) 
 
 3.Error and program flow (high priority)
 
