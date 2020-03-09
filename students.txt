@@ -1,7 +1,1 @@
 StudenID		Student_Name		Port_Number		Email
-<<<<<<< HEAD
-s3678491		Ted		61001		tedvu184@gmail.com
-s3678490		Kevin		61000		kevinvu184@gmail.com
-s3678494		Ted		61002		miavu244@gmail.com
-=======
->>>>>>> 31e96b034f673eef54cea054f0c52a292fbaf779
