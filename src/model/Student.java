@@ -13,14 +13,22 @@ public class Student {
 		this.portReserve = portReserve;
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("%s\t\t%s\t\t%d\t\t%s", studentID,name,portReserve,email);
+		return String.format("%s\t\t%s\t\t%d\t\t%s", studentID, name, portReserve, email);
 	}
-	
-	public String getEmail() {return email;}
-	public String getName() {return name;}
-	public int getPort() {return portReserve;}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPort() {
+		return portReserve;
+	}
+
 }
