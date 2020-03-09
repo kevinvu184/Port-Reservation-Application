@@ -21,8 +21,9 @@ public class Persistence {
 		String fileName = rootPath + "/students.txt";
 
 		File file = new File(fileName);
+		Scanner input = null;
 		try {
-			Scanner input = new Scanner(file);
+			input = new Scanner(file);
 			input.nextLine();
 			if (input.hasNextLine()) {
 				for (int i = PortReservationModel.START_PORT; i <= PortReservationModel.END_PORT; ++i) {
@@ -41,8 +42,10 @@ public class Persistence {
 				backUpExist = true;
 			}
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.err.println("ERROR OCCUR WHILE READING FROM DATABASE");
+		} finally {
+			input.close();
 		}
 	}
 

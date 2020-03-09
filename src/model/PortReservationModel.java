@@ -29,27 +29,30 @@ public class PortReservationModel {
 		String studentID = input.nextLine();
 		int portReserve;
 		boolean portReserved = true;
+		Student student = null;
 		do {
 			if (getAvailablePort().length() > 0) {
-				System.out.println("NOTE:Current available port is 61000-61999 excluding: " + getAvailablePort());
-			} else {
-				System.out.println("NOTE:Current available port is 61000-61999");
-			}
-			System.out.print("Port: ");
 
+				LoggingMsgConsole.printAvailablePortMsg(String.format("%s%s",
+						"NOTE:Current available port is 61000-61999 excluding: ", getAvailablePort()));
+			} else {
+				LoggingMsgConsole
+						.printAvailablePortMsg(String.format("%s", "NOTE:Current available port is 61000-61999"));
+			}
+			LoggingMsgConsole.promptPort();
 			portReserve = Integer.parseInt(input.nextLine());
 			if (map.containsKey(portReserve) && map.get(portReserve) == null) {
+				LoggingMsgConsole.promptEmail();
+				String email = input.nextLine();
+				student = new Student(studentID, name, portReserve, email);
+				map.put(portReserve, student);
 				portReserved = false;
 			} else {
-				System.out.println(
-						"The port you choose has been reserved or not in valid range, please enter another port");
+				LoggingMsgConsole.printErrorMsg();
 			}
 		} while (portReserved);
 		// conduct validation and reprompt
-		System.out.print("Email:");
-		String email = input.nextLine();
-		Student student = new Student(studentID, name, portReserve, email);
-		map.put(portReserve, student);
+
 		EmailSocketModel.run(student);
 
 		// writing to student database
@@ -87,7 +90,7 @@ public class PortReservationModel {
 		while (it.hasNext()) {
 			Map.Entry<Integer, Student> pair = (Map.Entry<Integer, Student>) it.next();
 			if (pair.getValue() != null) {
-				sBuffer.append(pair.getValue().toString()+"\n");
+				sBuffer.append(pair.getValue().toString() + "\n");
 				sBuffer.append("-----------------------------------------------------------------------------------\n");
 			}
 		}
