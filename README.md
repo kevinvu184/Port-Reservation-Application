@@ -9,7 +9,7 @@ This is a port reservation application implemented in Java
 
 # Installation Step to Set up SMTP Server
 
-1. Download SMTP Server Program from this Website: https://local-smtp-server-pro.soft32.com/
+1. Download SMTP Server Program from this website: https://bit.ly/2x0Ttz6 
 
 2. Go into your own account: Settings -> Security -> LessSecureApp -> Turn on allowance for access of Less Secure App
 
