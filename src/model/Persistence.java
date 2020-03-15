@@ -35,9 +35,10 @@ public class Persistence {
 				StringTokenizer sToken = new StringTokenizer(tmp);
 
 				Student s = new Student(sToken.nextToken(), sToken.nextToken(), Integer.parseInt(sToken.nextToken()),
-						sToken.nextToken());
+						Integer.parseInt(sToken.nextToken()), sToken.nextToken());
 
-				map.put(s.getPort(), s);
+				map.put(s.getPort_1(), s);
+				map.put(s.getPort_2(), s);
 
 				backUpExist = true;
 			}
