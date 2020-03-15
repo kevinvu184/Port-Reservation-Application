@@ -11,6 +11,6 @@ This is a port reservation application implemented in Java
 
 1. Download SMTP Server Program from this website: https://bit.ly/2x0Ttz6 
 
-2. Go into your own account: Settings -> Security -> LessSecureApp -> Turn on allowance for access of Less Secure App
+2. Go into your Google account: Settings -> Security -> LessSecureApp -> Turn on allowance for access of Less Secure App
 
 
