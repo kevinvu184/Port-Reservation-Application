@@ -1,16 +1,19 @@
-# Port-Reservation-Application
-This is a port reservation application implemented in Java 
+# Port Reservation Application
+RMIT-NP Semester 1 2020
 
-# TO DO
+© Kevin Vu 2020. Disclaimer: This repo is an asset of Kevin Vu & Ted Vu and is being developed as part of a School of Science Network Programming course at RMIT University in Melbourne, Australia. Any plagiarism act will be reported. 
 
-1.Testing + Refactoring code (Highest Priority)
+## Project Brief
+- An application for network admin to reserve network port for student.
+- All registered port must be persistence through out session.
 
-2.Add GUI (Moderate Priority) 
+## Learning Outcomes
+- OSI layer model and essential protocols (TCP, UDP)
+- SMTP server and how to send mail automatically.
 
-# Installation Step to Set up SMTP Server
-
-1. Download SMTP Server Program from this website: https://bit.ly/2x0Ttz6 
-
-2. Go into your Google account: Settings -> Security -> LessSecureApp -> Turn on allowance for access of Less Secure App
+## Short Demo
 
 
+## Installation Step to Set up SMTP Server
+- Download SMTP Server Program from this website: https://bit.ly/2x0Ttz6
+- Go into your Google account: Settings -> Security -> LessSecureApp -> Turn on allowance for access of Less Secure App
